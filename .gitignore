@@ -12,6 +12,10 @@
 bin/
 gen/
 
+# Android Studio
+*.iml
+.idea
+
 # Gradle files
 .gradle/
 build/
@@ -25,3 +29,9 @@ proguard/
 
 # Log Files
 *.log
+
+# OSX files
+.DS_Store
+
+# Windows thumbnail db
+Thumbs.db
