@@ -14,9 +14,6 @@ android:
     - addon-google_apis-google-22
 
     - sys-img-armeabi-v7a-android-22
-
-before_script:
-  - mv app/src/main/java/nl/vacatures/partnerapp/AppConfig.dist app/src/main/java/nl/
   
 # Create and start emulator
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
