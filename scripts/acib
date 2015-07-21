@@ -11,7 +11,7 @@ function create-and-start-device {
     # Create device
     echo n | android create avd -f \
         -n "${AVD_NAME:-test}" \
-        -t "${AVD_TARGET:-android-21}" \
+        -t "${AVD_TARGET:-android-22}" \
         -b "${AVD_ABI:-armeabi-v7a}" \
         -g "${AVD_TAG:-default}"
     # Start device
@@ -30,7 +30,7 @@ function install-and-update-sdk {
         ${UPDATE_PKGS:-'platform-tools,tools,extra-android-m2repository,extra-google-m2repository'}
     # Install or reinstall SDK packages (if empty, all packages are installed).
     echo y | android update sdk -a -u -t \
-        ${INSTALL_PKGS:-'build-tools-21.1.2'},${TARGET_PKGS:-}
+        ${INSTALL_PKGS:-'build-tools-22.0.1'},${TARGET_PKGS:-}
 }
 
 # Wait for device online
