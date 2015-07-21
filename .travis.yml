@@ -37,6 +37,7 @@ android:
 
 before_install:
   - chmod +x execute
+  - chmod +x scripts/acib
   - ./execute inexistent install-and-update-sdk
   - ./execute create-and-start-device wait-for-device-online
 
