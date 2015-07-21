@@ -34,11 +34,12 @@ android:
   components:
     - build-tools-22.0.1
     - android-22
+    - sys-img-armeabi-v7a-android-22
 
 before_install:
   - chmod +x execute
   - chmod +x scripts/acib
-  - ./execute inexistent install-and-update-sdk
+  - ./execute install-and-update-sdk
   - ./execute create-and-start-device wait-for-device-online
 
 install:
@@ -47,7 +48,7 @@ install:
   - ./gradlew assemble
 
 before_script:
-  - ./execute wait-for-device-ready inexistent
+  - ./execute wait-for-device-ready
 
 script:
   - ./gradlew connectedCheck
