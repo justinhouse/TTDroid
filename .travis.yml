@@ -25,16 +25,9 @@ env:
 
 matrix:
   include:
-    - env: AVD_TARGET=android-15
-    - env: AVD_TARGET=android-17
-    - env: AVD_TARGET=android-19
-    - env: AVD_TARGET=android-21
+    #- env: AVD_TARGET=android-19
+    #- env: AVD_TARGET=android-21
     - env: AVD_TARGET=android-22
-    - env: AVD_TARGET='Google Inc.:Google APIs:22’ AVD_TAG=google_apis
-           TARGET_PKGS=addon-google_apis-google-22,sys-img-armeabi-v7a-addon-google_apis-google-22
-  allow_failures:
-    - env: AVD_TARGET='Google Inc.:Google APIs:22’ AVD_TAG=google_apis
-           TARGET_PKGS=addon-google_apis-google-22,sys-img-armeabi-v7a-addon-google_apis-google-22
   fast_finish: true
 
 android:
@@ -54,7 +47,7 @@ install:
 
 before_script:
   - ./execute wait-for-device-ready inexistent
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - curl http://is.gd/android_wait_for_emulator > android-wait-for-emulator
   - chmod u+x android-wait-for-emulator
