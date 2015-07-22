@@ -12,8 +12,9 @@ android:
 
 before_script:
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - emulator -avd test -no-skin -no-audio -no-window -sdcard sdcard.img -qemu &
   - android-wait-for-emulator
+  - sleep 300
   - adb shell input keyevent 82 &
 
 script:

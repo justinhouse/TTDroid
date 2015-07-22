@@ -9,6 +9,8 @@ import android.test.UiThreadTest;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
