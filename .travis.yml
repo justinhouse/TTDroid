@@ -1,61 +1,29 @@
-# based on https://github.com/ardock/android-testing/tree/ttt-colors
 language: android
 
-sudo: false
-
-cache: false
-#  directories:
-#   - ${TRAVIS_BUILD_DIR}/gradle/caches/
-#    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
-
-notifications:
-  email: false
-
-env:
-  global:
-    - INSTALL_PKGS='build-tools-22.0.1’
-    - UPDATE_PKGS='platform-tools,tools,extra-android-m2repository,extra-google-m2repository'
-    - GRADLE_USER_HOME="${TRAVIS_BUILD_DIR}/gradle"
-    - ADB_INSTALL_TIMEOUT=8 # minutes (2 minutes by default)
-    - AVD_DEBUG='init,avd_config,nand_limits,keys,adb,adbserver,adbclient'
-    - ANDROID_LOG_TAGS='NetworkStats:S dalvikvm:S Zygote:S Resources:S *:D'
-    - ANDROID_SERIAL='emulator-5554'
-    - ANDROID_HOME='/usr/local/android-sdk'
-    - PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}"
-
-matrix:
-  include:
-    #- env: AVD_TARGET=android-19
-    #- env: AVD_TARGET=android-21
-    - env: AVD_TARGET=android-22
-  fast_finish: true
+jdk:
+ - oraclejdk8
 
 android:
   components:
+    - extra-android-m2repository
     - build-tools-22.0.1
     - android-22
     - sys-img-armeabi-v7a-android-22
 
-before_install:
-  - chmod +x execute
-  - chmod +x scripts/acib
-  - ./execute install-and-update-sdk
-  - ./execute create-and-start-device wait-for-device-online
-
-install:
-  - ./gradlew --version # show version and download Gradle Wrapper when is not present in cache
-  - ./gradlew clean # clean project and download Android dependencies when are not present in cache
-  - ./gradlew assemble
-
 before_script:
-  - ./execute wait-for-device-ready
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew connectedCheck
+    - ./gradlew clean test connectedAndroidTest
 
-after_failure:
-   - sudo apt-get update && sudo apt-get install mutt
-   - echo "Something failed" | mutt $( printf -- '-a %q ' build/screenshots/*.png ) -s "Travis fail" -- justin@treehouse.nl
+notifications:
+  email: false
 
-after_script:
-  - cat ${TRAVIS_BUILD_DIR}/espresso/*/app/build/outputs/androidTest-results/connected/* # show logs
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.gradle
