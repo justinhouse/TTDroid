@@ -51,7 +51,7 @@ before_script:
   - ./execute wait-for-device-ready
 
 script:
-  - ./gradlew connectedInstrumentTest
+  - ./gradlew connectedCheck
 
 after_script:
   - cat ${TRAVIS_BUILD_DIR}/espresso/*/app/build/outputs/androidTest-results/connected/* # show logs
