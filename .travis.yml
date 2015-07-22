@@ -53,5 +53,9 @@ before_script:
 script:
   - ./gradlew connectedCheck
 
+after_failure:
+   - sudo apt-get update && sudo apt-get install mutt
+   - echo "Something failed" | mutt $( printf -- '-a %q ' build/screenshots/*.png ) -s "Travis fail" -- justin@treehouse.nl
+
 after_script:
   - cat ${TRAVIS_BUILD_DIR}/espresso/*/app/build/outputs/androidTest-results/connected/* # show logs

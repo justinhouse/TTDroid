@@ -58,7 +58,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     @Test
-    @UiThreadTest
     public void testHelloWorld() throws Exception {
 
         onView(withId(R.id.welcome_text)).check(matches(withText("Hello world!")));
