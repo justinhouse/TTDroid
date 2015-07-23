@@ -30,11 +30,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class MainActivity2Test extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private MainActivity activity;
 
-    public MainActivityTest() {
+    public MainActivity2Test() {
         super(MainActivity.class);
     }
 
