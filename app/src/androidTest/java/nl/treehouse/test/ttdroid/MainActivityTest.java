@@ -60,6 +60,19 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     @Test
+    public void testCounter() {
+        // given
+        int counter = activity.getCounter();
+
+        // when
+        activity.addToCounter(2);
+        int newCounter = activity.getCounter();
+
+        // then
+        assertTrue(newCounter == counter + 2);
+    }
+
+    @Test
     public void testHelloWorld() throws Exception {
 
         onView(withId(R.id.welcome_text)).check(matches(withText("We started!")));

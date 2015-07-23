@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+    private int mCounter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,4 +52,15 @@ public class MainActivity extends Activity {
 
         return (String) textView.getText();
     }
+
+    protected void addToCounter(int update) {
+        mCounter += update;
+    }
+
+    protected int getCounter() {
+        return mCounter;
+    }
+
+
+
 }
