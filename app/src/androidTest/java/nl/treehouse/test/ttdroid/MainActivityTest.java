@@ -62,6 +62,25 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test
     public void testHelloWorld() throws Exception {
 
-        onView(withId(R.id.welcome_text)).check(matches(withText("Hello world!")));
+        onView(withId(R.id.welcome_text)).check(matches(withText("We started!")));
+    }
+
+    @Test
+    public void testChangeText() throws Exception {
+        // given
+        // We have our activity
+
+        // when
+        onView(withText("Change text")).perform(click());
+
+        // then
+        assertTrue(activity.getText().equals("We rock!"));
+
+    }
+
+    @Test
+    public void testWillMoveToNextActivity() {
+        onView(withId(R.id.next_button)).perform(click());
+        onView(withId(R.id.next_activity_view)).check(matches(isDisplayed()));
     }
 }
